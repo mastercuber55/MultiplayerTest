@@ -1,0 +1,6 @@
+[submodule "external/FraxFramework"]
+	path = external/FraxFramework
+	url = https://github.com/mastercuber55/Frax-Framework
+[submodule "external/enet"]
+	path = external/enet
+	url = https://github.com/lsalzman/enet.git
