@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -std=gnu++20 -Wall -Wextra -Wpedantic -g -o CMakeFiles/MultiplayerTest.dir/main.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/main.cxx",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/main.cxx",
+  "output": "CMakeFiles/MultiplayerTest.dir/main.cxx.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/callbacks.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/callbacks.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/callbacks.c",
+  "output": "external/enet/CMakeFiles/enet.dir/callbacks.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/compress.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/compress.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/compress.c",
+  "output": "external/enet/CMakeFiles/enet.dir/compress.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/host.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/host.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/host.c",
+  "output": "external/enet/CMakeFiles/enet.dir/host.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/list.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/list.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/list.c",
+  "output": "external/enet/CMakeFiles/enet.dir/list.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/packet.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/packet.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/packet.c",
+  "output": "external/enet/CMakeFiles/enet.dir/packet.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/peer.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/peer.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/peer.c",
+  "output": "external/enet/CMakeFiles/enet.dir/peer.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/protocol.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/protocol.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/protocol.c",
+  "output": "external/enet/CMakeFiles/enet.dir/protocol.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/unix.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/unix.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/unix.c",
+  "output": "external/enet/CMakeFiles/enet.dir/unix.c.o"
+},
+{
+  "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",
+  "command": "/usr/bin/cc -DHAS_FCNTL=1 -DHAS_GETADDRINFO=1 -DHAS_GETHOSTBYADDR_R=1 -DHAS_GETHOSTBYNAME_R=1 -DHAS_GETNAMEINFO=1 -DHAS_INET_NTOP=1 -DHAS_INET_PTON=1 -DHAS_MSGHDR_FLAGS=1 -DHAS_OFFSETOF=1 -DHAS_POLL=1 -DHAS_SOCKLEN_T=1 -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include   -Wno-error -o CMakeFiles/enet.dir/win32.c.o -c /home/mastercuber55/Code/MultiplayerTest/external/enet/win32.c",
+  "file": "/home/mastercuber55/Code/MultiplayerTest/external/enet/win32.c",
+  "output": "external/enet/CMakeFiles/enet.dir/win32.c.o"
+}
+]
