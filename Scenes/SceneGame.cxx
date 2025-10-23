@@ -1,7 +1,7 @@
 #include "Scenes.hpp"
 
-SceneGame::SceneGame(int argc, char *argv[]) {
-  Networking = new SceneFNet(this, argc, argv);
+SceneGame::SceneGame() {
+  Networking = new SceneFNet(this);
 }
 
 void SceneGame::Update(float dt) {

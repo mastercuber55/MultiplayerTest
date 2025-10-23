@@ -3,6 +3,29 @@
 
 namespace Fnet {
 
+extern ENetAddress Address;
+extern ENetEvent Event;
+extern ENetHost *Host;
+extern ENetPeer *Peer;
+
+void CreateServer();
+
+void JoinServer();
+
+void SendPacket(ENetPeer *peer, const void *data, size_t size,
+                enet_uint8 channel = 0,
+                enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE);
+
+int PollEvents(auto timeout);
+
+void Stop();
+
+} // namespace Fnet
+
+#ifdef FNET_IMPL
+
+namespace Fnet {
+
 ENetAddress Address;
 ENetEvent Event;
 ENetHost *Host = nullptr;
@@ -55,8 +78,8 @@ void JoinServer() {
 }
 
 void SendPacket(ENetPeer *peer, const void *data, size_t size,
-                enet_uint8 channel = 0,
-                enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE) {
+                enet_uint8 channel,
+                enet_uint32 flags) {
   if (!peer || !Host)
     return;
 
@@ -78,3 +101,4 @@ void Stop() {
 }
 
 } // namespace Fnet
+#endif

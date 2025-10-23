@@ -1,4 +1,5 @@
 #include "Scenes.hpp"
+#define FNET_IMPL
 #include "../FraxNet.hpp"
 #include <cstring>
 #include <unordered_map>
@@ -17,14 +18,8 @@ int nextAvailableSlot() {
   return -1; // no free slot
 }
 
-SceneFNet::SceneFNet(SceneGame* ptr, int argc, char* argv[]) {
+SceneFNet::SceneFNet(SceneGame* ptr) {
   Parent = ptr;
-
-  if (argc > 1 && strcmp(argv[1], "host") == 0) {
-    Fnet::CreateServer();
-  } else {
-    Fnet::JoinServer();
-  }
 }
 
 void SceneFNet::Update(float dt) {

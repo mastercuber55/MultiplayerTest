@@ -9,7 +9,7 @@ struct SceneGame : Frax::Scene {
 
   SceneFNet* Networking;
 
-  SceneGame(int argc, char *argv[]);
+  SceneGame();
 
   void Update(float dt) override;
   void Draw() override;
@@ -21,7 +21,7 @@ struct SceneFNet : Frax::Scene {
 
   SceneGame* Parent;
 
-  SceneFNet(SceneGame *ptr, int argc, char *argv[]);
+  SceneFNet(SceneGame *ptr);
 
   void Update(float dt) override;
   void Draw() override;
@@ -30,6 +30,18 @@ struct SceneFNet : Frax::Scene {
 };
 
 struct SceneStart : Frax::Scene {
+
+  Vector2 anchor01 = {176, 156};
+
+  bool HostPressed = false;
+  bool JoinPressed = false;
+  bool HostnameEditMode = false;
+  char HostnameText[128] = "127.0.0.1";
+  bool TextBox006EditMode = false;
+  char TextBox006Text[128] = "7777";
+
+  bool isHost;
+
   SceneStart();
 
   void Update(float dt) override;

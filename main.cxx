@@ -1,11 +1,15 @@
+#include <raylib.h>
 #define FRAX_IMPL
 #include "Scenes/Scenes.hpp"
 
-int main(int argc, char *argv[]) {
+int main() {
 
   Frax::Init("MultiplayerTest", {640, 480});
 
-  SceneGame(argc, argv).Run();
+  SceneStart().Run();
+
+  if (!WindowShouldClose())
+    SceneGame().Run();
 
   Frax::Close();
 }
