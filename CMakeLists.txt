@@ -25,6 +25,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE external/enet/include)
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CMAKE_SOURCE_DIR}/external/FraxFramework
+    ${CMAKE_SOURCE_DIR}/external/raygui/src
 )
 
 # Optional: enable compiler warnings

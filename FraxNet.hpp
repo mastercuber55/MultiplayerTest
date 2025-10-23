@@ -18,10 +18,9 @@ void CreateServer() {
   Address.host = ENET_HOST_ANY;
   Address.port = 7777;
 
-  // upto 4 clients can join
-  // 1 channel just for movement
-  // 0, 0, for unlimited bandwith
-  Host = enet_host_create(&Address, 4, 1, 0, 0);
+#define FNET_MAX_CLIENTS 4
+#define FNET_CHANNELS 1
+  Host = enet_host_create(&Address, FNET_MAX_CLIENTS, FNET_CHANNELS, 0, 0);
 
   if (!Host) {
     std::cerr << "FNET: Failed to create server host.\n";
