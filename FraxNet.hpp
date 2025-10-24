@@ -1,3 +1,5 @@
+#include "enet/types.h"
+#include <cstddef>
 #include <enet/enet.h>
 #include <iostream>
 
@@ -8,9 +10,11 @@ extern ENetEvent Event;
 extern ENetHost *Host;
 extern ENetPeer *Peer;
 
-void CreateServer();
+void CreateServer(enet_uint16 port = 7777, size_t MaxClients = 4,
+                  size_t ChannelsCount = 1);
 
-void JoinServer();
+void JoinServer(const char *hostName = "127.0.0.1", enet_uint16 port = 7777,
+                size_t ChannelsCount = 1);
 
 void SendPacket(ENetPeer *peer, const void *data, size_t size,
                 enet_uint8 channel = 0,
@@ -31,7 +35,7 @@ ENetEvent Event;
 ENetHost *Host = nullptr;
 ENetPeer *Peer = nullptr;
 
-void CreateServer() {
+void CreateServer(enet_uint16 port, size_t MaxClients, size_t ChannelsCount) {
 
   if (enet_initialize() != 0) {
     std::cerr << "FNET: Failed initialization.\n";
@@ -39,11 +43,9 @@ void CreateServer() {
   }
 
   Address.host = ENET_HOST_ANY;
-  Address.port = 7777;
+  Address.port = port;
 
-#define FNET_MAX_CLIENTS 4
-#define FNET_CHANNELS 1
-  Host = enet_host_create(&Address, FNET_MAX_CLIENTS, FNET_CHANNELS, 0, 0);
+  Host = enet_host_create(&Address, MaxClients, ChannelsCount, 0, 0);
 
   if (!Host) {
     std::cerr << "FNET: Failed to create server host.\n";
@@ -53,28 +55,28 @@ void CreateServer() {
   std::cout << "FNET: Server running on port" << Address.port << ".\n";
 }
 
-void JoinServer() {
+void JoinServer(const char *hostName, enet_uint16 port, size_t ChannelsCount) {
   if (enet_initialize() != 0) {
     std::cerr << "FNET: Failed initialization.\n";
     return;
   }
 
-  Host = enet_host_create(NULL, 1, 2, 0, 0);
+  Host = enet_host_create(NULL, 1, ChannelsCount, 0, 0);
   if (!Host) {
     std::cerr << "FNET: Failed to create client host.\n";
     return;
   }
 
-  enet_address_set_host(&Address, "127.0.0.1");
-  Address.port = 7777;
+  enet_address_set_host(&Address, hostName);
+  Address.port = port;
 
-  Peer = enet_host_connect(Host, &Address, 1, 0);
+  Peer = enet_host_connect(Host, &Address, ChannelsCount, 0);
   if (!Peer) {
     std::cerr << "FNET: No available peers.\n";
     return;
   }
 
-  std::cout << "Running on port 7777.\n";
+  std::cout << "FNET: Client running on port" << Address.port << ".\n";
 }
 
 void SendPacket(ENetPeer *peer, const void *data, size_t size,

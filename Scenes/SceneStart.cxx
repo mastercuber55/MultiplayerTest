@@ -6,16 +6,17 @@ extern "C" {
 #include "../FraxNet.hpp"
 
 SceneStart::SceneStart() {
-  GuiLoadStyle("../external/raygui/styles/cherry/style_cherry.rgs");
+  GuiLoadStyle("../external/raygui/styles/terminal/style_terminal.rgs");
 }
 
 void SceneStart::Update(float dt) {
   (void)dt;
   if (HostPressed) {
-    Fnet::CreateServer();
+    Fnet::CreateServer(static_cast<enet_uint16>(std::stoi(TextBox006Text)));
     this->KeepRunning = false;
   } else if (JoinPressed) {
-    Fnet::JoinServer();
+    Fnet::JoinServer(HostnameText, static_cast<enet_uint16>(
+                                       std::stoi(TextBox006Text)));
     this->KeepRunning = false;
   }
 }
