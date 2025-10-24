@@ -7,7 +7,12 @@ struct SceneGame : Frax::Scene {
   Vector2 Me = { 340, 200};
   Vector2 Players[4];
 
-  SceneFNet* Networking;
+  SceneFNet *Networking;
+
+  Vector2 joyBase;
+  Vector2 joyValue;
+  Vector2 joyKnob;
+  float joyRadius;
 
   SceneGame();
 
@@ -37,8 +42,8 @@ struct SceneStart : Frax::Scene {
   bool JoinPressed = false;
   bool HostnameEditMode = false;
   char HostnameText[128] = "127.0.0.1";
-  bool TextBox006EditMode = false;
-  char TextBox006Text[128] = "7777";
+  bool PortEditMode = false;
+  char PortText[128] = "7777";
 
   bool isHost;
 
