@@ -3,7 +3,6 @@
 extern "C" {
 #include "../external/raygui/src/raygui.h"
 }
-#include "../GameNet.hpp"
 #ifdef PLATFORM_ANDROID
 #include <raymob.h>
 #endif

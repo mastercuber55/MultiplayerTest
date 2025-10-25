@@ -150,7 +150,7 @@ void InitClient() {
 
 bool IsServer() { return isServer; }
 
-auto DiscoverAsClient() {
+std::list<udpdiscovery::DiscoveredPeer> DiscoverAsClient() {
   auto discovered = peer.ListDiscovered();
 
   if (!discovered.empty()) {
