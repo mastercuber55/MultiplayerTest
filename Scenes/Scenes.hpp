@@ -1,13 +1,14 @@
 #include <Frax.hpp>
+#include "../GameNet.hpp"
 
-struct SceneFNet;
+struct SceneNet;
 
 struct SceneGame : Frax::Scene {
 
   Vector2 Me = { 340, 200};
   Vector2 Players[4];
 
-  SceneFNet *Networking;
+  SceneNet *Networking;
 
   Vector2 joyBase;
   Vector2 joyValue;
@@ -22,16 +23,18 @@ struct SceneGame : Frax::Scene {
   ~SceneGame();
 };
 
-struct SceneFNet : Frax::Scene {
+struct SceneNet : Frax::Scene {
 
-  SceneGame* Parent;
+  SceneGame *Parent;
 
-  SceneFNet(SceneGame *ptr);
+  std::list<udpdiscovery::DiscoveredPeer> peers;
+
+  SceneNet(SceneGame *ptr);
 
   void Update(float dt) override;
   void Draw() override;
 
-  ~SceneFNet();
+  ~SceneNet();
 };
 
 struct SceneStart : Frax::Scene {

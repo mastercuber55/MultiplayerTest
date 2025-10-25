@@ -3,8 +3,10 @@
 extern "C" {
 #include "../external/raygui/src/raygui.h"
 }
-#include "../FraxNet.hpp"
+#include "../GameNet.hpp"
+#ifdef PLATFORM_ANDROID
 #include <raymob.h>
+#endif
 
 SceneStart::SceneStart() {
 #ifndef PLATFORM_ANDROID
@@ -18,11 +20,13 @@ void SceneStart::Update(float dt) {
   (void)dt;
   
   if (HostPressed) {
-    Fnet::CreateServer(static_cast<enet_uint16>(std::stoi(PortText)));
+    GameNet::CreateServer(static_cast<enet_uint16>(std::stoi(PortText)));
+    GameLAN::InitServer("Intel-PC");
     this->KeepRunning = false;
   } else if (JoinPressed) {
-    Fnet::JoinServer(HostnameText,
-                     static_cast<enet_uint16>(std::stoi(PortText)));
+    GameNet::JoinServer(HostnameText,
+                        static_cast<enet_uint16>(std::stoi(PortText)));
+    GameLAN::InitClient();
     this->KeepRunning = false;
   }
 }

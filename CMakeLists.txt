@@ -13,8 +13,14 @@ file(GLOB SOURCES
     "Scenes/*.cxx"
 )
 
+file(GLOB UDP_DISCOVERY_SRC
+    ${CMAKE_SOURCE_DIR}/external/udp-discovery-cpp/udp_discovery_peer.cpp
+    ${CMAKE_SOURCE_DIR}/external/udp-discovery-cpp/udp_discovery_ip_port.cpp
+    ${CMAKE_SOURCE_DIR}/external/udp-discovery-cpp/udp_discovery_protocol.cpp
+)
+
 # Add executable
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} ${UDP_DISCOVERY_SRC})
 
 find_package(raylib REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
@@ -26,6 +32,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE external/enet/include)
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CMAKE_SOURCE_DIR}/external/FraxFramework
     ${CMAKE_SOURCE_DIR}/external/raygui/src
+    ${CMAKE_SOURCE_DIR}/external/udp-discovery-cpp
 )
 
 # Optional: enable compiler warnings

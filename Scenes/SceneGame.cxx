@@ -1,15 +1,18 @@
 #include "Scenes.hpp"
+#include <raylib.h>
 #include <raymath.h>
 
 SceneGame::SceneGame() {
-  Networking = new SceneFNet(this);
+  Networking = new SceneNet(this);
 
 #ifdef PLATFORM_ANDROID
-  joyRadius = 64;
-  joyBase = {static_cast<float>(joyRadius * 1.5),
-             Frax::ScreenSize.y - joyRadius * 2};
-  joyKnob = joyBase;
-  joyValue = {0, 0};
+  {
+    joyRadius = 64;
+    joyBase = {static_cast<float>(joyRadius * 1.5),
+               Frax::ScreenSize.y - joyRadius * 2};
+    joyKnob = joyBase;
+    joyValue = {0, 0};
+  }
 #endif
 }
 
@@ -17,14 +20,15 @@ void SceneGame::Update(float dt) {
   auto spd = 256 * dt;
 
 #ifdef PLATFORM_ANDROID
+  {
   int touchCount = GetTouchPointCount();
   bool joystickActive = false;
 
   for (int i = 0; i < touchCount; i++) {
     Vector2 touch = GetTouchPosition(i);
 
-    // 👈 Left half: joystick
-    if (touch.x < GetScreenWidth() / 2) {
+    // Allows joystick if touch is detected just near the joystick.
+    if (CheckCollisionCircles(joyBase, joyRadius, touch, joyRadius*2)) {
       joystickActive = true;
 
       // calculate delta from base
@@ -51,7 +55,7 @@ void SceneGame::Update(float dt) {
 
   Me.x += joyValue.x * spd;
   Me.y += joyValue.y * spd;
-
+  }
 #else
 
   if (IsKeyDown(KEY_W))
@@ -77,6 +81,8 @@ void SceneGame::Draw() {
 
   DrawRectangleV(Me, {32, 32}, RED);
 
+  Networking->Draw();
+
 #ifdef PLATFORM_ANDROID
   DrawCircleLinesV(joyBase, joyRadius, WHITE);
   DrawCircleV(joyKnob, joyRadius / 2, WHITE);
@@ -84,5 +90,5 @@ void SceneGame::Draw() {
 }
 
 SceneGame::~SceneGame() {
-  free(Networking);
+  
 }
