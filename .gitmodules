@@ -7,3 +7,6 @@
 [submodule "external/raygui"]
 	path = external/raygui
 	url = https://github.com/raysan5/raygui
+[submodule "external/udp-discovery-cpp"]
+	path = external/udp-discovery-cpp
+	url = https://github.com/truvorskameikin/udp-discovery-cpp.git
