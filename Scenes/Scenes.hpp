@@ -1,5 +1,6 @@
-#include <Frax.hpp>
 #include "../GameNet.hpp"
+#include "StartMenuLayout.h"
+#include <Frax.hpp>
 
 struct SceneNet;
 
@@ -39,14 +40,7 @@ struct SceneNet : Frax::Scene {
 
 struct SceneStart : Frax::Scene {
 
-  Vector2 anchor01 = {176, 156};
-
-  bool HostPressed = false;
-  bool JoinPressed = false;
-  bool HostnameEditMode = false;
-  char HostnameText[128] = "127.0.0.1";
-  bool PortEditMode = false;
-  char PortText[128] = "7777";
+  GuiStartMenuState StartMenuState;
 
   bool isHost;
 

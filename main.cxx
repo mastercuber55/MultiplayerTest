@@ -1,5 +1,7 @@
 #include <raylib.h>
 #define FRAX_IMPL
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
 #include "Scenes/Scenes.hpp"
 
 int main() {
@@ -8,7 +10,7 @@ int main() {
 
   SceneStart().Run();
 
-  if (!WindowShouldClose())
+  if (!Frax::ShouldClose())
     SceneGame().Run();
 
   Frax::Close();
