@@ -1,6 +1,8 @@
 #include "../GameNet.hpp"
-#include "StartMenuLayout.h"
+#include "GuiLanMenu.h"
+#include "GuiStartMenu.h"
 #include <Frax.hpp>
+#include <vector>
 
 struct SceneNet;
 
@@ -40,7 +42,9 @@ struct SceneNet : Frax::Scene {
 
 struct SceneStart : Frax::Scene {
 
-  GuiStartMenuState StartMenuState;
+  GuiStartMenu StartMenu;
+  GuiLanMenu LanMenu;
+  std::vector<GuiBase*> GuiStates;
 
   bool isHost;
 

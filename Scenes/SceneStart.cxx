@@ -1,14 +1,39 @@
+#include "GuiBase.h"
+#include <iostream>
 #include <raylib.h>
 #define GUI_STARTMENU_IMPLEMENTATION
+#define GUI_LANMENU_IMPLEMENTATION
 #include "Scenes.hpp"
 #ifdef PLATFORM_ANDROID
 #include <raymob.h>
 #endif
 
+void GuiUpdateWindows(std::vector<GuiBase *> &GuiStates) {
+  Vector2 Mouse = GetMousePosition();
+
+  for (int i = (int)GuiStates.size() - 1; i >= 0; i--) {
+    GuiBase *win = GuiStates[i];
+
+    if (win->Active)
+      Frax::GuiMakeMoveableWindow(win->Dragging, win->Window);
+    else
+      continue;
+
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
+        CheckCollisionPointRec(Mouse, GuiStates[i]->Window)) {
+      GuiStates.erase(GuiStates.begin() + i);
+      GuiStates.push_back(win);
+      break;
+    }
+  }
+}
+
 SceneStart::SceneStart() {
 
   GuiLoadStyle("../external/raygui/styles/terminal/style_terminal.rgs");
-  StartMenuState = InitGuiStartMenu();
+  StartMenu.Init();
+
+  GuiStates.push_back(&StartMenu);
 
   BackgroundColor = GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR));
 }
@@ -16,37 +41,41 @@ SceneStart::SceneStart() {
 void SceneStart::Update(float dt) {
   (void)dt;
 
-  Frax::GuiMakeMoveableWindow(
-      StartMenuState.WindowDragging, StartMenuState.Anchor, 360);
+  GuiUpdateWindows(GuiStates);
 
-  if (StartMenuState.HostBtnPressed) {
-    GameNet::CreateServer(std::stoi(StartMenuState.PortInputText),
-                          StartMenuState.MaxPlayersInputValue);
+  if (StartMenu.HostBtnPressed) {
+    GameNet::CreateServer(std::stoi(StartMenu.PortInputText),
+                          StartMenu.MaxPlayersInputValue);
 
-    if (StartMenuState.LanGameChecked) {
-      GameLAN::InitServer(StartMenuState.ServerNameInputText);
+    if (StartMenu.LanGameChecked) {
+      GameLAN::InitServer(StartMenu.ServerNameInputText);
+      LanMenu.Init();
+      GuiStates.push_back(&LanMenu);
     }
+  } else if (StartMenu.JoinBtnPressed) {
+    if (!StartMenu.LanGameChecked) {
+      GameNet::JoinServer(StartMenu.HostNameInputText,
+                          std::stoi(StartMenu.PortInputText));
+    } else {
+      LanMenu.Init();
+      GuiStates.push_back(&LanMenu);
+      GameLAN::InitClient();
     }
+  }
 
-    // if (HostPressed) {
-    //   GameNet::CreateServer(static_cast<enet_uint16>(std::stoi(PortText)));
-    //   GameLAN::InitServer("Intel-PC");
-    //   this->KeepRunning = false;
-    // } else if (JoinPressed) {
-    //   GameNet::JoinServer(HostnameText,
-    //                       static_cast<enet_uint16>(std::stoi(PortText)));
-    //   GameLAN::InitClient();
-    //   this->KeepRunning = false;
-    // }
-    if (!StartMenuState.WindowActive)
-      Frax::KeepRunning = false;
+  if (!StartMenu.Active)
+    Frax::KeepRunning = false;
 }
 
 void SceneStart::Draw() {
-
-  GuiStartMenu(&StartMenuState);
+  if (GuiStates.size() > 1) {
+    GuiLock();
+    for (size_t i = 0; i < GuiStates.size() - 1; i++) {
+      GuiStates[i]->Draw();
+    }
+    GuiUnlock();
+  }
+  GuiStates.back()->Draw();
 }
 
-SceneStart::~SceneStart() {
-  GameNet::Stop();
-}
+SceneStart::~SceneStart() { GameNet::Stop(); }

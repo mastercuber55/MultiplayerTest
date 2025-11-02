@@ -1,5 +1,4 @@
 #include "enet/enet.h"
-#include <iostream>
 #include <string>
 #include <udp_discovery_peer.hpp>
 #include <udp_discovery_peer_parameters.hpp>
@@ -37,7 +36,7 @@ std::list<udpdiscovery::DiscoveredPeer> DiscoverAsClient();
 // #define GAMENET_IMPL
 #ifdef GAMENET_IMPL
 #undef GAMENET_IMPL
-
+#include <iostream>
 namespace GameNet {
 
 ENetAddress Address;
