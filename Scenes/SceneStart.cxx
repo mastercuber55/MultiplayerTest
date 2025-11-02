@@ -1,4 +1,6 @@
 #include "GuiBase.h"
+#include "udp_discovery_ip_port.hpp"
+#include "udp_discovery_peer.hpp"
 #include <iostream>
 #include <raylib.h>
 #define GUI_STARTMENU_IMPLEMENTATION
@@ -41,30 +43,63 @@ SceneStart::SceneStart() {
 void SceneStart::Update(float dt) {
   (void)dt;
 
+  // Update all GUI windows
   GuiUpdateWindows(GuiStates);
 
+  // --- Handle Host Button ---
   if (StartMenu.HostBtnPressed) {
-    GameNet::CreateServer(std::stoi(StartMenu.PortInputText),
-                          StartMenu.MaxPlayersInputValue);
+    int port = std::stoi(StartMenu.PortInputText);
+    int maxPlayers = StartMenu.MaxPlayersInputValue;
+
+    GameNet::CreateServer(port, maxPlayers);
 
     if (StartMenu.LanGameChecked) {
       GameLAN::InitServer(StartMenu.ServerNameInputText);
       LanMenu.Init();
+      LanMenu.WindowName = "Connnected LAN Clients";
       GuiStates.push_back(&LanMenu);
-    }
-  } else if (StartMenu.JoinBtnPressed) {
-    if (!StartMenu.LanGameChecked) {
-      GameNet::JoinServer(StartMenu.HostNameInputText,
-                          std::stoi(StartMenu.PortInputText));
-    } else {
-      LanMenu.Init();
-      GuiStates.push_back(&LanMenu);
-      GameLAN::InitClient();
     }
   }
 
-  if (!StartMenu.Active)
+  // --- Handle Join Button ---
+  else if (StartMenu.JoinBtnPressed) {
+    int port = std::stoi(StartMenu.PortInputText);
+
+    if (!StartMenu.LanGameChecked) {
+      GameNet::JoinServer(StartMenu.HostNameInputText, port);
+    } else {
+      GameLAN::InitClient();
+      LanMenu.Init();
+      LanMenu.WindowName = "Available LAN Servers";
+      GuiStates.push_back(&LanMenu);
+    }
+  }
+
+  if (!GameLAN::IsServer()) {
+    std::list<GameLAN::DPeer> NewDiscoveredPeers = GameLAN::DiscoverAsClient();
+    if (!NewDiscoveredPeers.empty() &&
+        !udpdiscovery::Same(GameLAN::params.same_peer_mode(), DiscoveredPeers,
+                            NewDiscoveredPeers)) {
+      IpAddresses.clear(); // Clear because we have discovered new clients.
+      for (udpdiscovery::DiscoveredPeer &peer : NewDiscoveredPeers) {
+        IpAddresses.push_back(udpdiscovery::IpToString(peer.ip_port().ip()));
+        if (LanMenu.options == "")
+          LanMenu.options = "";
+        LanMenu.options.append(peer.user_data() + ";");
+      }
+      DiscoveredPeers = NewDiscoveredPeers;
+    }
+  }
+
+  if (LanMenu.Active && !LanMenu.options.empty() &&
+      LanMenu.ListView003Active >= 0) {
+    LanMenu.ip = IpAddresses[LanMenu.ListView003Active];
+  }
+
+  // --- Exit Condition ---
+  if (!StartMenu.Active && !LanMenu.Active) {
     Frax::KeepRunning = false;
+  }
 }
 
 void SceneStart::Draw() {

@@ -27,10 +27,14 @@ void Stop();
 } // namespace GameNet
 
 namespace GameLAN {
+
+using DPeer = udpdiscovery::DiscoveredPeer;
+extern udpdiscovery::PeerParameters params;
+
 void InitServer(const std::string &user_data);
 void InitClient();
 bool IsServer();
-std::list<udpdiscovery::DiscoveredPeer> DiscoverAsClient();
+std::list<DPeer> DiscoverAsClient();
 } // namespace GameLAN
 
 // #define GAMENET_IMPL
@@ -119,10 +123,11 @@ void Stop() {
 namespace GameLAN {
 
 udpdiscovery::Peer peer;
+udpdiscovery::PeerParameters params;
 bool isServer = false;
 
 void InitServer(const std::string &user_data) {
-  udpdiscovery::PeerParameters params;
+
   params.set_port(12021); // discovery port
   params.set_application_id(7681412);
   params.set_can_discover(false);     // Can't Discover (only need broadcast)
@@ -137,7 +142,7 @@ void InitServer(const std::string &user_data) {
 }
 
 void InitClient() {
-  udpdiscovery::PeerParameters params;
+
   params.set_port(12021);
   params.set_application_id(7681412);
   params.set_can_discover(true); // Can discover (searches servers)
@@ -153,13 +158,8 @@ void InitClient() {
 
 bool IsServer() { return isServer; }
 
-std::list<udpdiscovery::DiscoveredPeer> DiscoverAsClient() {
-  auto discovered = peer.ListDiscovered();
-
-  if (!discovered.empty()) {
-    std::cout << "Discovered servers:\n";
-  }
-  return discovered;
+std::list<DPeer> DiscoverAsClient() {
+  return peer.ListDiscovered();
 }
 } // namespace GameLAN
 #endif
