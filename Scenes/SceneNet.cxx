@@ -1,4 +1,3 @@
-#include "udp_discovery_ip_port.hpp"
 #include <raylib.h>
 #define GAMENET_IMPL
 #include "Scenes.hpp"
@@ -24,10 +23,6 @@ SceneNet::SceneNet(SceneGame *ptr) { Parent = ptr; }
 
 void SceneNet::Update(float dt) {
   (void)dt;
-
-  if (!GameLAN::IsServer()) {
-    peers = GameLAN::DiscoverAsClient();
-  }
 
   while (GameNet::PollEvents(0) > 0) {
     switch (GameNet::Event.type) {
@@ -78,11 +73,6 @@ void SceneNet::Update(float dt) {
 }
 
 void SceneNet::Draw() {
-  if (!peers.empty()) {
-    for (auto &p : peers) {
-      DrawText(udpdiscovery::IpPortToString(p.ip_port()).c_str(), 32, 32, 32, GREEN);
-    }
-  }
 }
 
 SceneNet::~SceneNet() { GameNet::Stop(); }

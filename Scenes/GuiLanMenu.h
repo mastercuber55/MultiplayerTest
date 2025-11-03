@@ -80,11 +80,10 @@ extern "C" {            // Prevents name mangling of functions
 void GuiLanMenu::Init(void)
 {
 
-  Window = (Rectangle){312, 168, 432, 264};
+  Window = Rectangle{312, 168, 432, 264};
 
   Active = true;
   WindowName = "DYNAMIC NAME";
-  options = "";
   ip = "192.168.x.x";
   Dragging = false;
   Button002Pressed = false;
@@ -97,11 +96,11 @@ void GuiLanMenu::Draw()
 {
     if (Active)
     {
-        Active = !GuiWindowBox((Rectangle){ Window.x + 0, Window.y + 0, Window.width, Window.height }, WindowName);
-        Button002Pressed = GuiButton((Rectangle){ Window.x + 288, Window.y + 216, 120, 24 }, "Start/Join"); 
-        GuiListView((Rectangle){ Window.x + 24, Window.y + 48, 384, 152 }, options.c_str(), &ListView003ScrollIndex, &ListView003Active);
-        GuiStatusBar((Rectangle){ Window.x + 24, Window.y + 216, 240, 24 }, ip.c_str());
-        GuiLabel((Rectangle){ Window.x + 24, Window.y + 200, 120, 24 }, "Ip Address");
+        Active = !GuiWindowBox(Rectangle{ Window.x + 0, Window.y + 0, Window.width, Window.height }, WindowName);
+        Button002Pressed = GuiButton(Rectangle{ Window.x + 288, Window.y + 216, 120, 24 }, "Start/Join"); 
+        GuiListView(Rectangle{ Window.x + 24, Window.y + 48, 384, 152 }, options.c_str(), &ListView003ScrollIndex, &ListView003Active);
+        GuiStatusBar(Rectangle{ Window.x + 24, Window.y + 216, 240, 24 }, ip.c_str());
+        GuiLabel(Rectangle{ Window.x + 24, Window.y + 200, 120, 24 }, "Ip Address");
     }
 }
 

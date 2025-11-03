@@ -103,8 +103,10 @@ void SendPacket(ENetPeer *peer, const void *data, size_t size,
 }
 
 int PollEvents(auto timeout) {
-  if (Event.packet)
+  if (Event.packet) {
     enet_packet_destroy(GameNet::Event.packet);
+    Event.packet = nullptr;
+  }
   if (!GameNet::Host) {
     std::cerr << "GAMENET: Polling events without initializaiton!.\n";
     return -1;

@@ -30,9 +30,6 @@ struct SceneGame : Frax::Scene {
 struct SceneNet : Frax::Scene {
 
   SceneGame *Parent;
-
-  std::list<udpdiscovery::DiscoveredPeer> peers;
-
   SceneNet(SceneGame *ptr);
 
   void Update(float dt) override;

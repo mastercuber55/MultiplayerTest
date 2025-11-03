@@ -1,4 +1,5 @@
 #include "GuiBase.h"
+#include "enet/enet.h"
 #include "udp_discovery_ip_port.hpp"
 #include "udp_discovery_peer.hpp"
 #include <iostream>
@@ -75,6 +76,11 @@ void SceneStart::Update(float dt) {
     }
   }
 
+  if (LanMenu.Button002Pressed && LanMenu.ListView003Active >= 0 &&
+      LanMenu.ip != "192.168.x.x") {
+    GameNet::JoinServer(LanMenu.ip.c_str(), std::stoi(StartMenu.PortInputText));
+  }
+
   if (!GameLAN::IsServer()) {
     std::list<GameLAN::DPeer> NewDiscoveredPeers = GameLAN::DiscoverAsClient();
     if (!NewDiscoveredPeers.empty() &&
@@ -83,15 +89,42 @@ void SceneStart::Update(float dt) {
       IpAddresses.clear(); // Clear because we have discovered new clients.
       for (udpdiscovery::DiscoveredPeer &peer : NewDiscoveredPeers) {
         IpAddresses.push_back(udpdiscovery::IpToString(peer.ip_port().ip()));
-        if (LanMenu.options == "")
-          LanMenu.options = "";
         LanMenu.options.append(peer.user_data() + ";");
       }
       DiscoveredPeers = NewDiscoveredPeers;
     }
   }
 
-  if (LanMenu.Active && !LanMenu.options.empty() &&
+  if (GameNet::Host) {
+    while (GameNet::PollEvents(0) > 0) {
+      switch (GameNet::Event.type) {
+      case ENET_EVENT_TYPE_CONNECT: {
+        std::cout << "Connected.\n";
+
+        if (GameNet::Peer) {
+          std::string name = "Cube Nerd";
+          GameNet::SendPacket(GameNet::Peer, name.c_str(), name.size() + 1);
+        }
+        break;
+      }
+      case ENET_EVENT_TYPE_DISCONNECT: {
+        std::cout << "Disconnected.\n";
+        break;
+      }
+      case ENET_EVENT_TYPE_RECEIVE: {
+        std::cout << "Recieved Data.\n";
+        std::string name((char*)GameNet::Event.packet->data, GameNet::Event.packet->dataLength);
+        LanMenu.options.append(name + ";  ");
+        break;
+      }
+      case ENET_EVENT_TYPE_NONE: {
+        break;
+      }
+      }
+    }
+  }
+
+  if (LanMenu.Active && !GameLAN::IsServer() && !LanMenu.options.empty() &&
       LanMenu.ListView003Active >= 0) {
     LanMenu.ip = IpAddresses[LanMenu.ListView003Active];
   }
