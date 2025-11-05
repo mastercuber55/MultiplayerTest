@@ -1,8 +1,8 @@
 #define TWM_IMPLEMENTATION
-#include <twm.hpp>
 #include "enet/enet.h"
 #include <iostream>
 #include <raylib.h>
+#include <twm.hpp>
 #define GUI_STARTMENU_IMPLEMENTATION
 #define GUI_LANMENU_IMPLEMENTATION
 #include "Scenes.hpp"
@@ -21,7 +21,6 @@ SceneStart::SceneStart() {
 void SceneStart::Update(float dt) {
   (void)dt;
 
-  // Update all GUI windows
   TWM::Update();
 
   // --- Handle Host Button ---
@@ -34,6 +33,7 @@ void SceneStart::Update(float dt) {
     if (StartMenu.LanGameChecked) {
       GameLAN::InitServer(StartMenu.ServerNameInputText);
       LanMenu.Init();
+      LanMenu.ButtonText = "Start";
       LanMenu.WindowName = "Connnected LAN Clients";
     }
   }
@@ -47,12 +47,13 @@ void SceneStart::Update(float dt) {
     } else {
       GameLAN::InitClient();
       LanMenu.Init();
+      LanMenu.ButtonText = "Join";
       LanMenu.WindowName = "Available LAN Servers";
     }
   }
 
-  if (LanMenu.Button002Pressed && LanMenu.ListView003Active >= 0 &&
-      LanMenu.ip != "192.168.x.x") {
+  if (LanMenu.ButtonPressed && LanMenu.ListView003Active >= 0 &&
+      !isConnected && !LanMenu.ip.empty()) {
     GameNet::JoinServer(LanMenu.ip.c_str(), std::stoi(StartMenu.PortInputText));
   }
 
@@ -66,6 +67,7 @@ void SceneStart::Update(float dt) {
         IpAddresses.push_back(udpdiscovery::IpToString(peer.ip_port().ip()));
         LanMenu.options.append(peer.user_data() + ";");
       }
+      LanMenu.options.pop_back();
       DiscoveredPeers = NewDiscoveredPeers;
     }
   }
@@ -74,22 +76,34 @@ void SceneStart::Update(float dt) {
     while (GameNet::PollEvents(0) > 0) {
       switch (GameNet::Event.type) {
       case ENET_EVENT_TYPE_CONNECT: {
-        std::cout << "Connected.\n";
-
+        isConnected = true;
         if (GameNet::Peer) {
+          LanMenu.ButtonText = "Connected";
           std::string name = "Cube Nerd";
           GameNet::SendPacket(GameNet::Peer, name.c_str(), name.size() + 1);
         }
         break;
       }
       case ENET_EVENT_TYPE_DISCONNECT: {
-        std::cout << "Disconnected.\n";
+        if (GameNet::Peer) {
+          LanMenu.ButtonText = "Join";
+        } else {
+          Names.erase(GameNet::Event.peer);
+          LanMenu.options.clear();
+          for (const auto &[peer, name] : Names) {
+            LanMenu.options.append(name + ";");
+          }
+          LanMenu.options.pop_back();
+        }
         break;
       }
       case ENET_EVENT_TYPE_RECEIVE: {
-        std::cout << "Recieved Data.\n";
-        std::string name((char*)GameNet::Event.packet->data, GameNet::Event.packet->dataLength);
-        LanMenu.options.append(name + ";  ");
+        if (!GameNet::Peer) {
+          std::string name((char *)GameNet::Event.packet->data,
+                           GameNet::Event.packet->dataLength);
+          LanMenu.options.append(name + ";  ");
+          Names[GameNet::Event.peer] = name;
+        }
         break;
       }
       case ENET_EVENT_TYPE_NONE: {
@@ -110,8 +124,6 @@ void SceneStart::Update(float dt) {
   }
 }
 
-void SceneStart::Draw() {
-  TWM::Draw();
-}
+void SceneStart::Draw() { TWM::Draw(); }
 
 SceneStart::~SceneStart() { GameNet::Stop(); }

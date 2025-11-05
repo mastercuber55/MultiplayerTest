@@ -1,7 +1,9 @@
 #include "../GameNet.hpp"
 #include "GuiLanMenu.h"
 #include "GuiStartMenu.h"
+#include "enet/enet.h"
 #include <Frax.hpp>
+#include <unordered_map>
 #include <vector>
 
 struct SceneNet;
@@ -42,8 +44,10 @@ struct SceneStart : Frax::Scene {
   GuiStartMenu StartMenu;
   GuiLanMenu LanMenu;
   std::list<GameLAN::DPeer> DiscoveredPeers;
-  std::vector<std::string> IpAddresses;
+  std::vector<std::string> IpAddresses; // Client Side
+  std::unordered_map<ENetPeer *, std::string> Names; // Server Side
 
+  bool isConnected;
   bool isHost;
 
   SceneStart();
