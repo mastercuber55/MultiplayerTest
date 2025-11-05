@@ -20,6 +20,8 @@ void SendPacket(ENetPeer *peer, const void *data, size_t size,
                 enet_uint8 channel = 0,
                 enet_uint32 flags = ENET_PACKET_FLAG_RELIABLE);
 
+void BroadcastPacket(const void *data, size_t size);
+
 int PollEvents(auto timeout);
 
 void Stop();
@@ -102,6 +104,15 @@ void SendPacket(ENetPeer *peer, const void *data, size_t size,
   enet_host_flush(Host);
 }
 
+void BroadcastPacket(const void *data, size_t size) {
+  for (size_t i = 0; i < Host->peerCount; ++i) {
+    ENetPeer *peer = &Host->peers[i];
+    if (peer->state == ENET_PEER_STATE_CONNECTED) {
+      GameNet::SendPacket(peer, data, size);
+    }
+  }
+}
+
 int PollEvents(auto timeout) {
   if (Event.packet) {
     enet_packet_destroy(GameNet::Event.packet);
@@ -160,8 +171,6 @@ void InitClient() {
 
 bool IsServer() { return isServer; }
 
-std::list<DPeer> DiscoverAsClient() {
-  return peer.ListDiscovered();
-}
+std::list<DPeer> DiscoverAsClient() { return peer.ListDiscovered(); }
 } // namespace GameLAN
 #endif

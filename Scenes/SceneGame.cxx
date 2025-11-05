@@ -4,23 +4,17 @@
 
 SceneGame::SceneGame() {
   Networking = new SceneNet(this);
-
-#ifdef PLATFORM_ANDROID
-  {
-    joyRadius = 64;
-    joyBase = {static_cast<float>(joyRadius * 1.5),
-               Frax::ScreenSize.y - joyRadius * 2};
-    joyKnob = joyBase;
-    joyValue = {0, 0};
-  }
-#endif
+  InitAndroidControls();
 }
-
-void SceneGame::Update(float dt) {
-  auto spd = 256 * dt;
-
-#ifdef PLATFORM_ANDROID
-  {
+#ifdef PLATFORM_ANDORID
+void SceneGame::InitAndroidControls() {
+  joyRadius = 64;
+  joyBase = {static_cast<float>(joyRadius * 1.5),
+             Frax::ScreenSize.y - joyRadius * 2};
+  joyKnob = joyBase;
+  joyValue = {0, 0};
+}
+void SceneGame::UpdateAndroidControls() {
   int touchCount = GetTouchPointCount();
   bool joystickActive = false;
 
@@ -28,7 +22,7 @@ void SceneGame::Update(float dt) {
     Vector2 touch = GetTouchPosition(i);
 
     // Allows joystick if touch is detected just near the joystick.
-    if (CheckCollisionCircles(joyBase, joyRadius, touch, joyRadius*2)) {
+    if (CheckCollisionCircles(joyBase, joyRadius, touch, joyRadius * 2)) {
       joystickActive = true;
 
       // calculate delta from base
@@ -55,8 +49,18 @@ void SceneGame::Update(float dt) {
 
   Me.x += joyValue.x * spd;
   Me.y += joyValue.y * spd;
-  }
+}
+void SceneGame::DrawAndroidControls() {
+  DrawCircleLinesV(joyBase, joyRadius, WHITE);
+  DrawCircleV(joyKnob, joyRadius / 2, WHITE);
+}
 #else
+void SceneGame::InitAndroidControls() {}
+void SceneGame::UpdateAndroidControls() {}
+void SceneGame::DrawAndroidControls() {}
+#endif
+void SceneGame::Update(float dt) {
+  auto spd = 256 * dt;
 
   if (IsKeyDown(KEY_W))
     Me.y += -spd;
@@ -67,8 +71,6 @@ void SceneGame::Update(float dt) {
   if (IsKeyDown(KEY_D))
     Me.x += +spd;
 
-#endif
-  
   Networking->Update(dt);
 }
 
@@ -82,13 +84,6 @@ void SceneGame::Draw() {
   DrawRectangleV(Me, {32, 32}, RED);
 
   Networking->Draw();
-
-#ifdef PLATFORM_ANDROID
-  DrawCircleLinesV(joyBase, joyRadius, WHITE);
-  DrawCircleV(joyKnob, joyRadius / 2, WHITE);
-  #endif
 }
 
-SceneGame::~SceneGame() {
-  
-}
+SceneGame::~SceneGame() {}

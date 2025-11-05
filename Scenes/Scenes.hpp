@@ -25,6 +25,10 @@ struct SceneGame : Frax::Scene {
   void Update(float dt) override;
   void Draw() override;
 
+  void InitAndroidControls();
+  void UpdateAndroidControls();
+  void DrawAndroidControls();
+
   ~SceneGame();
 };
 
@@ -54,6 +58,19 @@ struct SceneStart : Frax::Scene {
 
   void Update(float dt) override;
   void Draw() override;
+
+  void HandleButtons();
+  void HandleNet();
+
+  void HandleHostButtonPressed();
+  void HandleJoinButtonPressed();
+  void HandleLanMenuUpdates();
+
+  void HandleLanDiscovery();
+
+  void HandleConnect();
+  void HandleDisconnect();
+  void HandleRecieve();
 
   ~SceneStart();
 };
