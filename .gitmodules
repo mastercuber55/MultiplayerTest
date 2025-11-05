@@ -10,3 +10,6 @@
 [submodule "external/udp-discovery-cpp"]
 	path = external/udp-discovery-cpp
 	url = https://github.com/truvorskameikin/udp-discovery-cpp.git
+[submodule "external/twm"]
+	path = external/twm
+	url = https://github.com/mastercuber55/TinyWindowManager.git

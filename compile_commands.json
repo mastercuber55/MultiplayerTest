@@ -1,69 +1,45 @@
 [
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneGame.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneGame.cxx",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneGame.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneGame.cxx",
   "file": "/home/mastercuber55/Code/MultiplayerTest/Scenes/SceneGame.cxx",
   "output": "CMakeFiles/MultiplayerTest.dir/Scenes/SceneGame.cxx.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneNet.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneNet.cxx",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneNet.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneNet.cxx",
   "file": "/home/mastercuber55/Code/MultiplayerTest/Scenes/SceneNet.cxx",
   "output": "CMakeFiles/MultiplayerTest.dir/Scenes/SceneNet.cxx.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneStart.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneStart.cxx",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/Scenes/SceneStart.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/Scenes/SceneStart.cxx",
   "file": "/home/mastercuber55/Code/MultiplayerTest/Scenes/SceneStart.cxx",
   "output": "CMakeFiles/MultiplayerTest.dir/Scenes/SceneStart.cxx.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/main.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/main.cxx",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/main.cxx.o -c /home/mastercuber55/Code/MultiplayerTest/main.cxx",
   "file": "/home/mastercuber55/Code/MultiplayerTest/main.cxx",
   "output": "CMakeFiles/MultiplayerTest.dir/main.cxx.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/discovery_example.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/discovery_example.cpp",
-  "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/discovery_example.cpp",
-  "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/discovery_example.cpp.o"
-},
-{
-  "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/discovery_tool.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/discovery_tool.cpp",
-  "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/discovery_tool.cpp",
-  "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/discovery_tool.cpp.o"
-},
-{
-  "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_ip_port.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_ip_port.cpp",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_ip_port.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_ip_port.cpp",
   "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_ip_port.cpp",
   "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_ip_port.cpp.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_peer.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_peer.cpp",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_peer.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_peer.cpp",
   "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_peer.cpp",
   "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_peer.cpp.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_peer_e2e_test.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_peer_e2e_test.cpp",
-  "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_peer_e2e_test.cpp",
-  "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_peer_e2e_test.cpp.o"
-},
-{
-  "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_protocol.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_protocol.cpp",
+  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -I/home/mastercuber55/Code/MultiplayerTest/external/twm -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_protocol.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_protocol.cpp",
   "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_protocol.cpp",
   "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_protocol.cpp.o"
-},
-{
-  "directory": "/home/mastercuber55/Code/MultiplayerTest/build",
-  "command": "/usr/bin/c++  -I/home/mastercuber55/Code/MultiplayerTest/external/enet/include -I/home/mastercuber55/Code/MultiplayerTest/external/FraxFramework -I/home/mastercuber55/Code/MultiplayerTest/external/raygui/src -I/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp -std=gnu++20 -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g -o CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_protocol_test.cpp.o -c /home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_protocol_test.cpp",
-  "file": "/home/mastercuber55/Code/MultiplayerTest/external/udp-discovery-cpp/udp_discovery_protocol_test.cpp",
-  "output": "CMakeFiles/MultiplayerTest.dir/external/udp-discovery-cpp/udp_discovery_protocol_test.cpp.o"
 },
 {
   "directory": "/home/mastercuber55/Code/MultiplayerTest/build/external/enet",

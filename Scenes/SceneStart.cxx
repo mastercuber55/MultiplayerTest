@@ -1,7 +1,6 @@
-#include "GuiBase.h"
+#define TWM_IMPLEMENTATION
+#include <twm.hpp>
 #include "enet/enet.h"
-#include "udp_discovery_ip_port.hpp"
-#include "udp_discovery_peer.hpp"
 #include <iostream>
 #include <raylib.h>
 #define GUI_STARTMENU_IMPLEMENTATION
@@ -11,32 +10,10 @@
 #include <raymob.h>
 #endif
 
-void GuiUpdateWindows(std::vector<GuiBase *> &GuiStates) {
-  Vector2 Mouse = GetMousePosition();
-
-  for (int i = (int)GuiStates.size() - 1; i >= 0; i--) {
-    GuiBase *win = GuiStates[i];
-
-    if (win->Active)
-      Frax::GuiMakeMoveableWindow(win->Dragging, win->Window);
-    else
-      continue;
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) &&
-        CheckCollisionPointRec(Mouse, GuiStates[i]->Window)) {
-      GuiStates.erase(GuiStates.begin() + i);
-      GuiStates.push_back(win);
-      break;
-    }
-  }
-}
-
 SceneStart::SceneStart() {
 
   GuiLoadStyle("../external/raygui/styles/terminal/style_terminal.rgs");
   StartMenu.Init();
-
-  GuiStates.push_back(&StartMenu);
 
   BackgroundColor = GetColor(GuiGetStyle(DEFAULT, BACKGROUND_COLOR));
 }
@@ -45,7 +22,7 @@ void SceneStart::Update(float dt) {
   (void)dt;
 
   // Update all GUI windows
-  GuiUpdateWindows(GuiStates);
+  TWM::Update();
 
   // --- Handle Host Button ---
   if (StartMenu.HostBtnPressed) {
@@ -58,7 +35,6 @@ void SceneStart::Update(float dt) {
       GameLAN::InitServer(StartMenu.ServerNameInputText);
       LanMenu.Init();
       LanMenu.WindowName = "Connnected LAN Clients";
-      GuiStates.push_back(&LanMenu);
     }
   }
 
@@ -72,7 +48,6 @@ void SceneStart::Update(float dt) {
       GameLAN::InitClient();
       LanMenu.Init();
       LanMenu.WindowName = "Available LAN Servers";
-      GuiStates.push_back(&LanMenu);
     }
   }
 
@@ -136,14 +111,7 @@ void SceneStart::Update(float dt) {
 }
 
 void SceneStart::Draw() {
-  if (GuiStates.size() > 1) {
-    GuiLock();
-    for (size_t i = 0; i < GuiStates.size() - 1; i++) {
-      GuiStates[i]->Draw();
-    }
-    GuiUnlock();
-  }
-  GuiStates.back()->Draw();
+  TWM::Draw();
 }
 
 SceneStart::~SceneStart() { GameNet::Stop(); }

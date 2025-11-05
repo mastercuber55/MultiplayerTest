@@ -33,13 +33,14 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}/external/FraxFramework
     ${CMAKE_SOURCE_DIR}/external/raygui/src
     ${CMAKE_SOURCE_DIR}/external/udp-discovery-cpp
+    ${CMAKE_SOURCE_DIR}/external/twm
 )
 
 # Optional: enable compiler warnings
 if(MSVC)
-    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX -g)
+    target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX)
 else()
-    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wno-missing-field-initializers -g)
+    target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wno-missing-field-initializers)
 endif()
 
 # Set output directories

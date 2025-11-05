@@ -2,7 +2,6 @@
 #include "GuiLanMenu.h"
 #include "GuiStartMenu.h"
 #include <Frax.hpp>
-#include <unordered_map>
 #include <vector>
 
 struct SceneNet;
@@ -42,7 +41,6 @@ struct SceneStart : Frax::Scene {
 
   GuiStartMenu StartMenu;
   GuiLanMenu LanMenu;
-  std::vector<GuiBase *> GuiStates;
   std::list<GameLAN::DPeer> DiscoveredPeers;
   std::vector<std::string> IpAddresses;
 
