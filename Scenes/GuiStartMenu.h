@@ -46,7 +46,7 @@ extern "C" {            // Prevents name mangling of functions
 //----------------------------------------------------------------------------------
 void GuiStartMenu::Init() {
 
-  Bounds = Rectangle{312, 192, 360, 288};
+  Bounds = Rectangle{0, 0, 360, 288};
 
   ServerNameInputEditMode = false;
   strcpy(ServerNameInputText, "Honeywale");

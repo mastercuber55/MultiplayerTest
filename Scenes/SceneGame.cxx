@@ -1,10 +1,34 @@
 #include "Scenes.hpp"
+#include "enet/enet.h"
+#include <any>
+#include <cstring>
+#include <iostream>
 #include <raylib.h>
 #include <raymath.h>
+#include <unordered_map>
 
-SceneGame::SceneGame() {
-  Networking = new SceneNet(this);
+struct PeerData {
+  std::string Name;
+  size_t indexOfPlayer;
+};
+
+SceneGame::SceneGame(std::any names) {
   InitAndroidControls();
+  auto Names =
+      std::any_cast<std::unordered_map<ENetPeer *, std::string>>(names);
+  if (Names.empty())
+    return;
+
+  Others.push_back(Me);
+  
+  size_t i = 1;
+  for (const auto &[peer, name] : Names) {
+    auto data = new PeerData;
+    data->Name = name;
+    data->indexOfPlayer = i;
+    peer->data = data;
+    i++;
+  }
 }
 #ifdef PLATFORM_ANDORID
 void SceneGame::InitAndroidControls() {
@@ -71,19 +95,70 @@ void SceneGame::Update(float dt) {
   if (IsKeyDown(KEY_D))
     Me.x += +spd;
 
-  Networking->Update(dt);
+  HandleNet();
 }
 
-void SceneGame::Draw() {
-  for (auto &plr : Players) {
-    if (plr.x != 0 && plr.y != 0) {
-      DrawRectangleV(plr, {32, 32}, BLUE);
+void SceneGame::HandleNet() {
+  while (GameNet::PollEvents(0) > 0) {
+    switch (GameNet::Event.type) {
+    case ENET_EVENT_TYPE_CONNECT:
+      NetOnConnect();
+      break;
+    case ENET_EVENT_TYPE_DISCONNECT:
+      NetOnDisconnect();
+      break;
+    case ENET_EVENT_TYPE_RECEIVE:
+      NetOnRecieve();
+      break;
+    case ENET_EVENT_TYPE_NONE: {
+    } break;
     }
   }
 
-  DrawRectangleV(Me, {32, 32}, RED);
+  NetSendData();
+}
 
-  Networking->Draw();
+void SceneGame::NetSendData() {
+  if (GameNet::Peer) {
+    GameNet::SendPacket(GameNet::Peer, &Me, sizeof(Vector2));
+  } else {
+    Others[0] = Me;
+    for (size_t i = 0; i < GameNet::Host->peerCount; ++i) {
+      ENetPeer *peer = &GameNet::Host->peers[i];
+      if (peer->state == ENET_PEER_STATE_CONNECTED) {
+
+        GameNet::SendPacket(peer, Others.data(),
+                            sizeof(Vector2) * Others.size());
+      }
+    }
+  }
+}
+void SceneGame::NetOnConnect() {}
+void SceneGame::NetOnDisconnect() {
+  delete (PeerData *)GameNet::Event.peer->data;
+}
+void SceneGame::NetOnRecieve() {
+  if (GameNet::Peer) {
+    size_t DataSize = GameNet::Event.packet->dataLength;
+    size_t Count = DataSize / sizeof(Vector2);
+
+    Others.resize(Count);
+    std::memcpy(Others.data(), GameNet::Event.packet->data, DataSize);
+  } else {
+    Vector2 Player = *(Vector2 *)GameNet::Event.packet->data;
+    auto data = (PeerData *)GameNet::Event.peer->data;
+    if (data->indexOfPlayer >= Others.size())
+      Others.resize(data->indexOfPlayer + 1);
+    Others[data->indexOfPlayer] = Player;
+  }
+}
+
+void SceneGame::Draw() {
+  for (auto &plr : Others) {
+    DrawRectangleV(plr, {32, 32}, BLUE);
+  }
+
+  DrawRectangleV(Me, {32, 32}, RED);
 }
 
 SceneGame::~SceneGame() {}

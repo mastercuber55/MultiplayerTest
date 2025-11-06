@@ -37,7 +37,7 @@ struct GuiLanMenu : TWM::Window {
 void GuiLanMenu::Init(void)
 {
   
-  Bounds = Rectangle{312, 168, 432, 264};
+  Bounds = Rectangle{0, 0, 432, 264};
 
   Active = true;
   WindowName = "DYNAMIC NAME";

@@ -22,7 +22,7 @@ void SendPacket(ENetPeer *peer, const void *data, size_t size,
 
 void BroadcastPacket(const void *data, size_t size);
 
-int PollEvents(auto timeout);
+int PollEvents(enet_uint32 timeout);
 
 void Stop();
 
@@ -113,7 +113,7 @@ void BroadcastPacket(const void *data, size_t size) {
   }
 }
 
-int PollEvents(auto timeout) {
+int PollEvents(enet_uint32 timeout) {
   if (Event.packet) {
     enet_packet_destroy(GameNet::Event.packet);
     Event.packet = nullptr;

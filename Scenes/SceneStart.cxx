@@ -33,7 +33,7 @@ void SceneStart::Update(float dt) {
   }
 }
 
-inline void SceneStart::HandleHostButtonPressed() {
+void SceneStart::HandleHostButtonPressed() {
   int port = std::stoi(StartMenu.PortInputText);
   int maxPlayers = StartMenu.MaxPlayersInputValue;
 
@@ -47,7 +47,7 @@ inline void SceneStart::HandleHostButtonPressed() {
   }
 }
 
-inline void SceneStart::HandleJoinButtonPressed() {
+void SceneStart::HandleJoinButtonPressed() {
   int port = std::stoi(StartMenu.PortInputText);
 
   if (!StartMenu.LanGameChecked) {
@@ -60,8 +60,14 @@ inline void SceneStart::HandleJoinButtonPressed() {
   }
 }
 
-inline void SceneStart::HandleLanMenuUpdates() {
+void SceneStart::HandleLanMenuUpdates() {
+  if (LanMenu.Active && !GameLAN::IsServer() && !LanMenu.options.empty() &&
+      LanMenu.ListView003Active >= 0) {
+    LanMenu.ip = IpAddresses[LanMenu.ListView003Active];
+  }
 
+  if (!LanMenu.ButtonPressed)
+    return;
   // Handle a client trying to join a server.
   if (LanMenu.ListView003Active >= 0 && !isConnected && !LanMenu.ip.empty()) {
     GameNet::JoinServer(LanMenu.ip.c_str(), std::stoi(StartMenu.PortInputText));
@@ -69,12 +75,8 @@ inline void SceneStart::HandleLanMenuUpdates() {
   // Handle a server starting the game.
   else if (isConnected && !GameNet::Peer) {
     KeepRunning = false;
+    this->ReturnData = Names;
     GameNet::BroadcastPacket(&GAME_STARTED_CODE, sizeof(int));
-  }
-
-  if (LanMenu.Active && !GameLAN::IsServer() && !LanMenu.options.empty() &&
-      LanMenu.ListView003Active >= 0) {
-    LanMenu.ip = IpAddresses[LanMenu.ListView003Active];
   }
 }
 
@@ -83,11 +85,11 @@ void SceneStart::HandleButtons() {
     HandleHostButtonPressed();
   else if (StartMenu.JoinBtnPressed)
     HandleJoinButtonPressed();
-  else if (LanMenu.ButtonPressed)
-    HandleLanMenuUpdates();
+
+  HandleLanMenuUpdates();
 }
 
-inline void SceneStart::HandleLanDiscovery() {
+void SceneStart::HandleLanDiscovery() {
   std::list<GameLAN::DPeer> NewDiscoveredPeers = GameLAN::DiscoverAsClient();
   if (!NewDiscoveredPeers.empty() &&
       !udpdiscovery::Same(GameLAN::params.same_peer_mode(), DiscoveredPeers,
@@ -102,7 +104,7 @@ inline void SceneStart::HandleLanDiscovery() {
   }
 }
 
-inline void SceneStart::HandleConnect() {
+void SceneStart::HandleConnect() {
   isConnected = true;
   if (GameNet::Peer) {
     LanMenu.ButtonText = "Connected";
@@ -111,7 +113,7 @@ inline void SceneStart::HandleConnect() {
   }
 }
 
-inline void SceneStart::HandleDisconnect() {
+void SceneStart::HandleDisconnect() {
   if (GameNet::Peer) {
     LanMenu.ButtonText = "Join";
   } else {
@@ -124,7 +126,7 @@ inline void SceneStart::HandleDisconnect() {
   }
 }
 
-inline void SceneStart::HandleRecieve() {
+void SceneStart::HandleRecieve() {
   if (!GameNet::Peer) {
     std::string name((char *)GameNet::Event.packet->data,
                      GameNet::Event.packet->dataLength);
@@ -135,8 +137,10 @@ inline void SceneStart::HandleRecieve() {
       int code;
       memcpy(&code, GameNet::Event.packet->data, sizeof(int));
 
-      if (code == GAME_STARTED_CODE)
+      if (code == GAME_STARTED_CODE) {
         KeepRunning = false;
+        this->ReturnData = Names;
+      }
     }
   }
 }
@@ -165,4 +169,5 @@ void SceneStart::HandleNet() {
 }
 void SceneStart::Draw() { TWM::Draw(); }
 
-SceneStart::~SceneStart() { GameNet::Stop(); }
+SceneStart::~SceneStart() {
+}
